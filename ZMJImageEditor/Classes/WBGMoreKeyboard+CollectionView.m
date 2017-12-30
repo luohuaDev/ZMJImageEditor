@@ -9,7 +9,7 @@
 #import "WBGMoreKeyboard+CollectionView.h"
 #import "WBGMoreKeyboardCell.h"
 #import <Masonry/Masonry.h>
-@import YYCategories.UIView_YYAdd;
+#import "YYCategories.h"
 
 #define     SPACE_TOP        15
 #define     WIDTH_CELL       60
