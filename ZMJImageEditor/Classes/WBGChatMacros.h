@@ -65,3 +65,5 @@ typedef NS_ENUM(NSInteger, WBGChatBarStatus) {
 
 
 #endif /* WBGChatMacros_h */
+
+//Test Commit
