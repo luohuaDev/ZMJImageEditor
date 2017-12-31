@@ -38,6 +38,10 @@ typedef NS_OPTIONS(NSInteger, WBGImageEditorComponent) {
 
 - (void)showInViewController:(UIViewController<WBGImageEditorTransitionDelegate> *)controller withImageView:(UIImageView*)imageView;
 - (void)refreshToolSettings;
+
+//add custom dev
+- (id)initWithClearImage:(UIImage *)imageTouMing imageView:(UIImageView *)imageView delegate:(id<WBGImageEditorDelegate>)delegate dataSource:(id<WBGImageEditorDataSource>)dataSource;
+
 @end
 
 

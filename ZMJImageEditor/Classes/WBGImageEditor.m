@@ -25,6 +25,34 @@
     return [self initWithImage:image delegate:nil dataSource:nil];
 }
 
+- (id)initWithClearImage:(UIImage *)imageTouMing imageView:(UIImageView *)imageView delegate:(id<WBGImageEditorDelegate>)delegate dataSource:(id<WBGImageEditorDataSource>)dataSource
+{
+    WBGImageEditor *editor = [[WBGImageEditor alloc] initWithImage:imageTouMing delegate:delegate dataSource:dataSource];
+    
+    UIView *editorView = editor.view;
+    NSArray *editorViewSubviews = editorView.subviews;
+    
+    UIView *tempView = [editorViewSubviews firstObject];
+    NSArray *tempViewSubViews = tempView.subviews;
+    
+    for(UIView * view in tempViewSubViews)
+    {
+        if([view isKindOfClass:[UIScrollView class]])
+        {
+            NSArray *scrollSubViews = view.subviews;
+            if([scrollSubViews count] == 1)
+            {
+                UIView *scrollSubView = [scrollSubViews firstObject];
+                [view insertSubview:imageView belowSubview:scrollSubView];
+            }
+            
+            break;
+        }
+    }
+    
+    return editor;
+}
+
 - (id)initWithImage:(UIImage*)image delegate:(id<WBGImageEditorDelegate>)delegate dataSource:(id<WBGImageEditorDataSource>)dataSource;
 {
     return [[WBGImageEditorViewController alloc] initWithImage:image delegate:delegate dataSource:dataSource];
