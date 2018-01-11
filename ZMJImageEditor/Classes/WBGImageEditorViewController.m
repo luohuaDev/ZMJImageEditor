@@ -463,8 +463,14 @@ NSString * const kColorPanNotificaiton = @"kColorPanNotificaiton";
     [self.keyboard showInView:self.view withAnimation:YES];
 }
 
-- (IBAction)backAction:(UIButton *)sender {
+- (IBAction)backAction:(UIButton *)sender
+{
     [self dismissViewControllerAnimated:YES completion:nil];
+    
+    if(self.delegate && [self.delegate respondsToSelector:@selector(imageEditorDidCancel:)])
+    {
+        [self.delegate imageEditorDidCancel:self];
+    }
 }
 
 - (IBAction)undoAction:(UIButton *)sender {
