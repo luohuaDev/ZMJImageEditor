@@ -220,8 +220,14 @@
     self.shape.path = self.bezierPath.CGPath;
 }
 
-- (void)drawPath {
-    [self.pathColor set];
+- (void)drawPath
+{
+    [[UIColor whiteColor] set];
+
+    CGContextRef content = UIGraphicsGetCurrentContext();
+    
+    CGContextSetShadowWithColor(content, CGSizeMake(0, 0), 6.0, self.pathColor.CGColor);
+    
     [self.bezierPath stroke];
 }
 
