@@ -202,6 +202,7 @@
     shapeLayer.lineWidth = pathWidth;
     shapeLayer.fillColor = [UIColor clearColor].CGColor;
     shapeLayer.path = bezierPath.CGPath;
+    shapeLayer.shouldRasterize = YES;
     
     WBGPath *path   = [[WBGPath alloc] init];
     path.beginPoint = beginPoint;
