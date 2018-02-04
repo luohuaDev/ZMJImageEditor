@@ -630,12 +630,15 @@ NSString * const kColorPanNotificaiton = @"kColorPanNotificaiton";
     }
     
     [UIView animateWithDuration:animation ? .25f : 0.f delay:0 usingSpringWithDamping:1 initialSpringVelocity:1 options:isHide ? UIViewAnimationOptionCurveEaseOut : UIViewAnimationOptionCurveEaseIn animations:^{
-        if (isHide) {
-            bottomBarBottom.constant = -49.f;
-            topBarTop.constant = -64.f;
-        } else {
-            bottomBarBottom.constant = 0;
-            topBarTop.constant = 0;
+        if(isHide)
+        {
+            self.bottomBar.alpha = 0.0;
+            self.topBar.alpha = 0.0;
+        }
+        else
+        {
+            self.bottomBar.alpha = 1.0;
+            self.topBar.alpha = 1.0;
         }
         _barsHiddenStatus = isHide;
         [self.view layoutIfNeeded];
