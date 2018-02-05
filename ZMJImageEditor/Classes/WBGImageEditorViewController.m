@@ -27,11 +27,6 @@ NSString * const kColorPanNotificaiton = @"kColorPanNotificaiton";
 
 @property (nonatomic, strong, nullable) WBGImageToolBase *currentTool;
 
-@property (strong, nonatomic) IBOutlet UIView *topBannerView;
-@property (strong, nonatomic) IBOutlet UIView *bottomBannerView;
-@property (strong, nonatomic) IBOutlet UIView *leftBannerView;
-@property (strong, nonatomic) IBOutlet UIView *rightBannerView;
-
 @property (weak,   nonatomic) IBOutlet UIImageView *imageView;
 @property (strong, nonatomic) IBOutlet UIImageView *drawingView;
 @property (weak,   nonatomic) IBOutlet UIScrollView *scrollView;
@@ -181,63 +176,6 @@ NSString * const kColorPanNotificaiton = @"kColorPanNotificaiton";
     } else {
         //self.drawingView.frame = self.imageView.superview.frame;
     }
-    
-    
-    self.topBannerView.frame = CGRectMake(0, 0, self.imageView.width, CGRectGetMinY(self.imageView.frame));
-    self.bottomBannerView.frame = CGRectMake(0, CGRectGetMaxY(self.imageView.frame), self.imageView.width, self.drawingView.height - CGRectGetMaxY(self.imageView.frame));
-    self.leftBannerView.frame = CGRectMake(0, 0, CGRectGetMinX(self.imageView.frame), self.drawingView.height);
-    self.rightBannerView.frame= CGRectMake(CGRectGetMaxX(self.imageView.frame), 0, self.drawingView.width - CGRectGetMaxX(self.imageView.frame), self.drawingView.height);
-}
-
-- (UIView *)topBannerView {
-    if (!_topBannerView) {
-        _topBannerView = ({
-            UIView *view = [[UIView alloc] init];
-            view.backgroundColor = self.scrollView.backgroundColor;
-            [self.imageView.superview addSubview:view];
-            view;
-        });
-    }
-    
-    return _topBannerView;
-}
-
-- (UIView *)bottomBannerView {
-    if (!_bottomBannerView) {
-        _bottomBannerView = ({
-            UIView *view = [[UIView alloc] init];
-            view.backgroundColor = self.scrollView.backgroundColor;
-            [self.imageView.superview addSubview:view];
-            view;
-        });
-    }
-    return _bottomBannerView;
-}
-
-- (UIView *)leftBannerView {
-    if (!_leftBannerView) {
-        _leftBannerView = ({
-            UIView *view = [[UIView alloc] init];
-            view.backgroundColor = self.scrollView.backgroundColor;
-            [self.imageView.superview addSubview:view];
-            view;
-        });
-    }
-    
-    return _leftBannerView;
-}
-
-- (UIView *)rightBannerView {
-    if (!_rightBannerView) {
-        _rightBannerView = ({
-            UIView *view = [[UIView alloc] init];
-            view.backgroundColor = self.scrollView.backgroundColor;
-            [self.imageView.superview addSubview:view];
-            view;
-        });
-    }
-    
-    return _rightBannerView;
 }
 
 #pragma mark - 初始化 &getter

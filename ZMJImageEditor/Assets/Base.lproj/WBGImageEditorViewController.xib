@@ -19,6 +19,7 @@
                 <outlet property="paperButton" destination="dR4-MJ-4Kq" id="ljA-cj-EGo"/>
                 <outlet property="scrollView" destination="eg2-dz-mJn" id="syX-xc-Eiv"/>
                 <outlet property="sendButton" destination="Li1-F3-HD7" id="ILa-6f-mdo"/>
+                <outlet property="sendButtonLab" destination="vNi-rU-irR" id="YWT-GD-lhG"/>
                 <outlet property="textButton" destination="cnm-kZ-dpx" id="Gv1-I7-f2Y"/>
                 <outlet property="undoButton" destination="yeV-aj-vVt" id="CuD-0G-Osx"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
