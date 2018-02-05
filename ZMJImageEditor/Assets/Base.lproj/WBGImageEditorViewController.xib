@@ -14,6 +14,7 @@
             <connections>
                 <outlet property="backButton" destination="U1E-fP-iEK" id="5iE-72-bQz"/>
                 <outlet property="colorPan" destination="sUm-KM-2Ao" id="aBq-pe-bzS"/>
+                <outlet property="drawModeSaveBtn" destination="J7o-jv-iM1" id="AID-bc-pTP"/>
                 <outlet property="imageView" destination="L0E-Hz-dO7" id="8Uo-zs-uHX"/>
                 <outlet property="panButton" destination="vif-ym-mAZ" id="dhq-qL-UOU"/>
                 <outlet property="paperButton" destination="dR4-MJ-4Kq" id="ljA-cj-EGo"/>
@@ -73,7 +74,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yeV-aj-vVt">
-                            <rect key="frame" x="0.0" y="609" width="58" height="58"/>
+                            <rect key="frame" x="0.0" y="0.0" width="58" height="58"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="58" id="1tJ-SH-tcY"/>
                                 <constraint firstAttribute="height" constant="58" id="lJo-i2-5Eg"/>
@@ -151,13 +152,24 @@
                                 <action selector="textAction:" destination="-1" eventType="touchUpInside" id="oFt-qU-bGu"/>
                             </connections>
                         </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J7o-jv-iM1" userLabel="Draw Mode Save Btn">
+                            <rect key="frame" x="317" y="0.0" width="58" height="58"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="58" id="KxN-Wz-vIg"/>
+                                <constraint firstAttribute="height" constant="58" id="a7C-l2-EcW"/>
+                            </constraints>
+                            <state key="normal" title="Save"/>
+                            <connections>
+                                <action selector="onClickDrawModeSaveBtn:" destination="-1" eventType="touchUpInside" id="Suu-AC-fFM"/>
+                            </connections>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
+                        <constraint firstItem="J7o-jv-iM1" firstAttribute="top" secondItem="H4n-yc-FcR" secondAttribute="top" id="0AO-Yk-i7n"/>
                         <constraint firstItem="cnm-kZ-dpx" firstAttribute="top" secondItem="H4n-yc-FcR" secondAttribute="top" id="4oj-Gd-SRM"/>
                         <constraint firstItem="vNi-rU-irR" firstAttribute="top" secondItem="Li1-F3-HD7" secondAttribute="bottom" id="7ct-Dn-sEw"/>
                         <constraint firstItem="dR4-MJ-4Kq" firstAttribute="leading" secondItem="vif-ym-mAZ" secondAttribute="trailing" id="8oV-nW-4ix"/>
-                        <constraint firstAttribute="bottom" secondItem="yeV-aj-vVt" secondAttribute="bottom" id="9F8-Fm-9nf"/>
                         <constraint firstAttribute="trailing" secondItem="eg2-dz-mJn" secondAttribute="trailing" id="A11-hY-5UT"/>
                         <constraint firstAttribute="trailing" secondItem="dR4-MJ-4Kq" secondAttribute="trailing" id="GVg-J9-I3v"/>
                         <constraint firstItem="yeV-aj-vVt" firstAttribute="leading" secondItem="H4n-yc-FcR" secondAttribute="leading" id="Gxb-bo-QdI"/>
@@ -167,9 +179,11 @@
                         <constraint firstItem="eg2-dz-mJn" firstAttribute="top" secondItem="H4n-yc-FcR" secondAttribute="top" id="J9K-nJ-E6y"/>
                         <constraint firstItem="U1E-fP-iEK" firstAttribute="top" secondItem="H4n-yc-FcR" secondAttribute="top" id="Nqb-6f-hqS"/>
                         <constraint firstAttribute="bottom" secondItem="eg2-dz-mJn" secondAttribute="bottom" id="QTJ-8O-ejx"/>
+                        <constraint firstItem="yeV-aj-vVt" firstAttribute="top" secondItem="H4n-yc-FcR" secondAttribute="top" id="VbC-QR-xgJ"/>
                         <constraint firstItem="eg2-dz-mJn" firstAttribute="leading" secondItem="H4n-yc-FcR" secondAttribute="leading" id="bL6-cg-ksh"/>
                         <constraint firstItem="U1E-fP-iEK" firstAttribute="leading" secondItem="H4n-yc-FcR" secondAttribute="leading" id="fLU-X1-aw6"/>
                         <constraint firstAttribute="trailing" secondItem="vNi-rU-irR" secondAttribute="trailing" id="glN-WJ-Lad"/>
+                        <constraint firstAttribute="trailing" secondItem="J7o-jv-iM1" secondAttribute="trailing" id="i5l-sM-h5G"/>
                         <constraint firstItem="vif-ym-mAZ" firstAttribute="leading" secondItem="cnm-kZ-dpx" secondAttribute="trailing" id="mQL-bt-VgO"/>
                         <constraint firstItem="dR4-MJ-4Kq" firstAttribute="top" secondItem="H4n-yc-FcR" secondAttribute="top" id="yBS-b2-2DO"/>
                     </constraints>
