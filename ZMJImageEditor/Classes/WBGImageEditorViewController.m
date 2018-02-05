@@ -23,14 +23,9 @@
 NSString * const kColorPanNotificaiton = @"kColorPanNotificaiton";
 #pragma mark - WBGImageEditorViewController
 
-@interface WBGImageEditorViewController () <UINavigationBarDelegate, UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBGKeyboardDelegate> {
-    
-    __weak IBOutlet NSLayoutConstraint *topBarTop;
-    __weak IBOutlet NSLayoutConstraint *bottomBarBottom;
-}
+@interface WBGImageEditorViewController () <UINavigationBarDelegate, UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBGKeyboardDelegate>
+
 @property (nonatomic, strong, nullable) WBGImageToolBase *currentTool;
-@property (weak, nonatomic) IBOutlet UIView *bottomBar;
-@property (weak, nonatomic) IBOutlet UIView *topBar;
 
 @property (strong, nonatomic) IBOutlet UIView *topBannerView;
 @property (strong, nonatomic) IBOutlet UIView *bottomBannerView;
@@ -43,6 +38,7 @@ NSString * const kColorPanNotificaiton = @"kColorPanNotificaiton";
 @property (strong, nonatomic) IBOutlet WBGColorPan *colorPan;
 
 @property (weak, nonatomic) IBOutlet UIButton *sendButton;
+@property (weak, nonatomic) IBOutlet UILabel *sendButtonLab;
 @property (weak, nonatomic) IBOutlet UIButton *panButton;
 @property (weak, nonatomic) IBOutlet UIButton *textButton;
 @property (weak, nonatomic) IBOutlet UIButton *clipButton;
@@ -632,13 +628,27 @@ NSString * const kColorPanNotificaiton = @"kColorPanNotificaiton";
     [UIView animateWithDuration:animation ? .25f : 0.f delay:0 usingSpringWithDamping:1 initialSpringVelocity:1 options:isHide ? UIViewAnimationOptionCurveEaseOut : UIViewAnimationOptionCurveEaseIn animations:^{
         if(isHide)
         {
-            self.bottomBar.alpha = 0.0;
-            self.topBar.alpha = 0.0;
+            //self.bottomBar.alpha = 0.0;
+            //self.topBar.alpha = 0.0;
+            self.backButton.alpha = 0.0;
+            self.panButton.alpha = 0.0;
+            self.textButton.alpha = 0.0;
+            self.paperButton.alpha = 0.0;
+            self.undoButton.alpha = 0.0;
+            self.sendButton.alpha = 0.0;
+            self.sendButtonLab.alpha = 0.0;
         }
         else
         {
-            self.bottomBar.alpha = 1.0;
-            self.topBar.alpha = 1.0;
+            //self.bottomBar.alpha = 1.0;
+            //self.topBar.alpha = 1.0;
+            self.backButton.alpha = 1.0;
+            self.panButton.alpha = 1.0;
+            self.textButton.alpha = 1.0;
+            self.paperButton.alpha = 1.0;
+            self.undoButton.alpha = 1.0;
+            self.sendButton.alpha = 1.0;
+            self.sendButtonLab.alpha = 1.0;
         }
         _barsHiddenStatus = isHide;
         [self.view layoutIfNeeded];
