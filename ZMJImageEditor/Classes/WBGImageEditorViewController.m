@@ -201,6 +201,14 @@ NSString * const kColorPanNotificaiton = @"kColorPanNotificaiton";
             [weakSelf hiddenTopAndBottomBar:isDrawing animation:YES];
         };
         _drawTool.drawingDidTap = ^(void) {
+            for(UIView *subView in weakSelf.drawingView.subviews)
+            {
+                if([subView isKindOfClass:[WBGTextToolView class]])
+                {
+                    [WBGTextToolView setInactiveTextView:(WBGTextToolView *)subView];
+                }
+            }
+            
             [weakSelf hiddenTopAndBottomBar:!weakSelf.barsHiddenStatus animation:YES];
         };
         _drawTool.pathWidth = [self.dataSource respondsToSelector:@selector(imageEditorDrawPathWidth)] ? [self.dataSource imageEditorDrawPathWidth].floatValue : 5.0f;
