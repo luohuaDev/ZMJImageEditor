@@ -217,6 +217,14 @@ NSString * const kColorPanNotificaiton = @"kColorPanNotificaiton";
             [weakSelf hiddenColorPan:YES animation:YES];
             weakSelf.currentMode = EditorNonMode;
             weakSelf.currentTool = nil;
+            
+            for(UIView *subView in weakSelf.drawingView.subviews)
+            {
+                if([subView isKindOfClass:[WBGTextToolView class]])
+                {
+                    [WBGTextToolView setInactiveTextView:(WBGTextToolView *)subView];
+                }
+            }
         };
     }
     
@@ -347,6 +355,14 @@ NSString * const kColorPanNotificaiton = @"kColorPanNotificaiton";
     self.currentMode = EditorDrawMode;
     
     self.currentTool = self.drawTool;
+    
+    for(UIView *subView in self.drawingView.subviews)
+    {
+        if([subView isKindOfClass:[WBGTextToolView class]])
+        {
+            [WBGTextToolView setInactiveTextView:(WBGTextToolView *)subView];
+        }
+    }
     
     [self hiddenColorPan:NO animation:YES];
     

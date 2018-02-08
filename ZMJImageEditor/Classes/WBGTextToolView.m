@@ -308,21 +308,39 @@ static WBGTextToolView *activeView = nil;
 
 - (void)viewDidTap:(UITapGestureRecognizer*)sender
 {
-    if (sender.state == UIGestureRecognizerStateEnded) {
-        if(self.active){
-            [self editTextAgain:sender];
-        } else {
+    if(sender.state == UIGestureRecognizerStateEnded)
+    {
+        if(self.textTool.editor.currentMode == EditorDrawMode)
+        {
+            return;
+        }
+        
+        if(self.active)
+        {
+            if(self.image == nil)
+            {
+                [self editTextAgain:sender];
+            }
+        }
+        else
+        {
             //取消当前
             [self.textTool.editor resetCurrentTool];
         }
-        [[self class] setActiveTextView:self];
-        [self.textTool.editor hiddenTopAndBottomBar:NO animation:YES];
         
+        [[self class] setActiveTextView:self];
+        
+        [self.textTool.editor hiddenTopAndBottomBar:NO animation:YES];
     }
 }
 
 - (void)viewDidPan:(UIPanGestureRecognizer*)recognizer
 {
+    if(self.textTool.editor.currentMode == EditorDrawMode)
+    {
+        return;
+    }
+    
     //平移
     [[self class] setActiveTextView:self];
     UIView *piece = _archerBGView;
@@ -354,6 +372,12 @@ static WBGTextToolView *activeView = nil;
 }
 
 - (void)viewDidPinch:(UIPinchGestureRecognizer *)recognizer {
+    
+    if(self.textTool.editor.currentMode == EditorDrawMode)
+    {
+        return;
+    }
+    
     //缩放
     [[self class] setActiveTextView:self];
     
@@ -392,6 +416,10 @@ static WBGTextToolView *activeView = nil;
 }
 
 - (void)viewDidRotation:(UIRotationGestureRecognizer *)recognizer {
+    if(self.textTool.editor.currentMode == EditorDrawMode)
+    {
+        return;
+    }
     //旋转
     if (recognizer.state == UIGestureRecognizerStateBegan ||
         recognizer.state == UIGestureRecognizerStateChanged) {
