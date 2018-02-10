@@ -304,6 +304,8 @@ static WBGTextToolView *activeView = nil;
     [[self class] setActiveTextView:nextTarget];
     [self removeFromSuperview];
     [_archerBGView removeFromSuperview];
+    
+    [self.textTool.editor onClickDeleteWidgetBtn];
 }
 
 - (void)viewDidTap:(UITapGestureRecognizer*)sender

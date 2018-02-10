@@ -9,6 +9,7 @@
 #import "WBGImageEditor.h"
 #import "WBGImageEditorViewController.h"
 
+
 @interface WBGImageEditor ()
 
 @end
@@ -28,6 +29,8 @@
 - (id)initWithClearImage:(UIImage *)imageTouMing imageView:(UIImageView *)imageView delegate:(id<WBGImageEditorDelegate>)delegate dataSource:(id<WBGImageEditorDataSource>)dataSource
 {
     WBGImageEditor *editor = [[WBGImageEditor alloc] initWithImage:imageTouMing delegate:delegate dataSource:dataSource];
+    
+    editor.state = WBGImageEditorStateEditFeed;
     
     UIView *editorView = editor.view;
     NSArray *editorViewSubviews = editorView.subviews;
@@ -55,7 +58,11 @@
 
 - (id)initWithImage:(UIImage*)image delegate:(id<WBGImageEditorDelegate>)delegate dataSource:(id<WBGImageEditorDataSource>)dataSource;
 {
-    return [[WBGImageEditorViewController alloc] initWithImage:image delegate:delegate dataSource:dataSource];
+    WBGImageEditorViewController *vc = [[WBGImageEditorViewController alloc] initWithImage:image delegate:delegate dataSource:dataSource];
+    
+    vc.state = WBGImageEditorStatePostFeed;
+    
+    return vc;
 }
 
 - (id)initWithDelegate:(id<WBGImageEditorDelegate>)delegate

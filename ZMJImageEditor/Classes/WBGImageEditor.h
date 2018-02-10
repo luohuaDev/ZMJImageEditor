@@ -11,6 +11,11 @@
 @protocol WBGImageEditorDelegate, WBGImageEditorTransitionDelegate, WBGImageEditorDataSource;
 @class WBGMoreKeyboardItem;
 
+typedef NS_ENUM(NSInteger, WBGImageEditorState) {
+    WBGImageEditorStatePostFeed = 0,
+    WBGImageEditorStateEditFeed = 1,
+};
+
 typedef NS_OPTIONS(NSInteger, WBGImageEditorComponent) {
     WBGImageEditorDrawComponent = 1 << 0,
     WBGImageEditorTextComponent = 1 << 1,
@@ -28,6 +33,8 @@ typedef NS_OPTIONS(NSInteger, WBGImageEditorComponent) {
 };
 
 @interface WBGImageEditor : UIViewController
+
+@property (nonatomic, assign) WBGImageEditorState state;
 
 @property (nonatomic, weak) id<WBGImageEditorDelegate> delegate;
 @property (nonatomic, weak) id<WBGImageEditorDataSource> dataSource;

@@ -125,6 +125,12 @@ NSString * const kColorPanNotificaiton = @"kColorPanNotificaiton";
     self.paperButton.hidden = YES;
     self.colorPan.hidden = YES;
     self.drawModeSaveBtn.hidden = YES;
+    
+    if(self.state == WBGImageEditorStateEditFeed)
+    {
+        self.sendButton.hidden = YES;
+        self.sendButtonLab.hidden = YES;
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -198,7 +204,7 @@ NSString * const kColorPanNotificaiton = @"kColorPanNotificaiton";
             }
         };
         _drawTool.drawingCallback = ^(BOOL isDrawing) {
-            [weakSelf hiddenTopAndBottomBar:isDrawing animation:YES];
+            //[weakSelf hiddenTopAndBottomBar:isDrawing animation:YES];
         };
         _drawTool.drawingDidTap = ^(void) {
             for(UIView *subView in weakSelf.drawingView.subviews)
@@ -209,7 +215,7 @@ NSString * const kColorPanNotificaiton = @"kColorPanNotificaiton";
                 }
             }
             
-            [weakSelf hiddenTopAndBottomBar:!weakSelf.barsHiddenStatus animation:YES];
+            //[weakSelf hiddenTopAndBottomBar:!weakSelf.barsHiddenStatus animation:YES];
         };
         _drawTool.pathWidth = [self.dataSource respondsToSelector:@selector(imageEditorDrawPathWidth)] ? [self.dataSource imageEditorDrawPathWidth].floatValue : 5.0f;
     }
@@ -233,6 +239,8 @@ NSString * const kColorPanNotificaiton = @"kColorPanNotificaiton";
                     [WBGTextToolView setInactiveTextView:(WBGTextToolView *)subView];
                 }
             }
+            
+            [weakSelf calEditStateSendBtnShow];
         };
     }
     
@@ -343,6 +351,42 @@ NSString * const kColorPanNotificaiton = @"kColorPanNotificaiton";
 
 
 #pragma mark - Actions
+- (void)onClickDeleteWidgetBtn
+{
+    [self calEditStateSendBtnShow];
+}
+
+- (void)calEditStateSendBtnShow
+{
+    NSInteger tempDrawCount = [self.drawTool.allLineMutableArray count];
+    
+    NSInteger tempWidgetCount = 0;
+    
+    for(UIView *subView in self.drawingView.subviews)
+    {
+        if([subView isKindOfClass:[WBGTextToolView class]])
+        {
+            tempWidgetCount++;
+        }
+    }
+    
+    if(self.state == WBGImageEditorStateEditFeed)
+    {
+        BOOL isHide = NO;
+        if(tempDrawCount + tempWidgetCount > 0)
+        {
+            isHide = NO;
+        }
+        else
+        {
+            isHide = YES;
+        }
+        
+        self.sendButton.hidden = isHide;
+        self.sendButtonLab.hidden = isHide;
+    }
+}
+
 ///发送
 - (IBAction)sendAction:(UIButton *)sender {
 
@@ -397,6 +441,8 @@ NSString * const kColorPanNotificaiton = @"kColorPanNotificaiton";
     self.paperButton.hidden = NO;
     
     self.drawModeSaveBtn.hidden = YES;
+    
+    [self calEditStateSendBtnShow];
 }
 
 ///裁剪模式
@@ -519,6 +565,7 @@ NSString * const kColorPanNotificaiton = @"kColorPanNotificaiton";
     [self.drawingView addSubview:view];
     [WBGTextToolView setActiveTextView:view];
     
+    [self calEditStateSendBtnShow];
 }
 
 #pragma mark - WBGKeyboardDelegate

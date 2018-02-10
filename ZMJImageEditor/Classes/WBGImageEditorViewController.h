@@ -38,4 +38,6 @@ extern NSString * const kColorPanNotificaiton;
 
 - (void)editTextAgain;
 - (void)hiddenTopAndBottomBar:(BOOL)isHide animation:(BOOL)animation;
+- (void)onClickDeleteWidgetBtn;
+
 @end
