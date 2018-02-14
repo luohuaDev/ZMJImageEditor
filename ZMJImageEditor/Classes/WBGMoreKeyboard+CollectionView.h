@@ -9,7 +9,7 @@
 #import "WBGMoreKeyboard.h"
 
 @interface WBGMoreKeyboard (CollectionView) <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
-@property (nonatomic, assign, readonly) NSInteger pageItemCount;
 
 - (void)registerCellClass;
+
 @end

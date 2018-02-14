@@ -18,38 +18,45 @@
 + (WBGMoreKeyboard *)keyboard
 {
     static WBGMoreKeyboard *moreKB = nil;
+    
     static dispatch_once_t once;
+    
     dispatch_once(&once, ^{
         moreKB = [[WBGMoreKeyboard alloc] init];
     });
+    
     return moreKB;
 }
 
 - (id)init
 {
-    if (self = [super init]) {
-        [self setBackgroundColor:[UIColor whiteColor]];//[UIColor colorGrayForChatBar]];
+    if(self = [super init])
+    {
+        [self setBackgroundColor:[UIColor whiteColor]];
+        
         [self addSubview:self.collectionView];
-        [self addSubview:self.pageControl];
+        
         [self p_addMasonry];
         
         [self registerCellClass];
     }
+    
     return self;
 }
 
 - (CGFloat)keyboardHeight
 {
-    return HEIGHT_CHAT_KEYBOARD;
+    CGFloat temp = 433.0 / 667.0;
+    CGFloat height = temp * [[UIScreen mainScreen] bounds].size.height;
+    return height;
 }
 
 #pragma mark - # Public Methods
 - (void)setChatMoreKeyboardData:(NSMutableArray *)chatMoreKeyboardData
 {
     _chatMoreKeyboardData = chatMoreKeyboardData;
+    
     [self.collectionView reloadData];
-    NSUInteger pageNumber = chatMoreKeyboardData.count / self.pageItemCount + (chatMoreKeyboardData.count % self.pageItemCount == 0 ? 0 : 1);
-    [self.pageControl setNumberOfPages:pageNumber];
 }
 
 - (void)reset
@@ -67,14 +74,9 @@
 - (void)p_addMasonry
 {
     [self.collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self);
+        make.top.mas_equalTo(0);
         make.left.and.right.mas_equalTo(self);
-        make.bottom.mas_equalTo(-25);
-    }];
-    [self.pageControl mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.and.right.mas_equalTo(self);
-        make.height.mas_equalTo(20);
-        make.bottom.mas_equalTo(-2);
+        make.bottom.mas_equalTo(0);
     }];
 }
 
@@ -83,7 +85,7 @@
     [super drawRect:rect];
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGContextSetLineWidth(context, 0.5);
-    CGContextSetStrokeColorWithColor(context, [UIColor colorGrayLine].CGColor);
+    CGContextSetStrokeColorWithColor(context, [UIColor lightGrayColor].CGColor);
     CGContextBeginPath(context);
     CGContextMoveToPoint(context, 0, 0);
     CGContextAddLineToPoint(context, WIDTH_SCREEN, 0);
@@ -93,32 +95,24 @@
 #pragma mark - # Getter
 - (UICollectionView *)collectionView
 {
-    if (_collectionView == nil) {
+    if(_collectionView == nil)
+    {
         UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
-        [layout setScrollDirection:UICollectionViewScrollDirectionHorizontal];
+        
+        [layout setScrollDirection:UICollectionViewScrollDirectionVertical];
+        
         _collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:layout];
+        
         [_collectionView setBackgroundColor:[UIColor clearColor]];
-        [_collectionView setPagingEnabled:YES];
+        [_collectionView setPagingEnabled:NO];
         [_collectionView setDataSource:self];
         [_collectionView setDelegate:self];
         [_collectionView setShowsHorizontalScrollIndicator:NO];
         [_collectionView setShowsHorizontalScrollIndicator:NO];
         [_collectionView setScrollsToTop:NO];
     }
+    
     return _collectionView;
 }
-
-- (UIPageControl *)pageControl
-{
-    if (_pageControl == nil) {
-        _pageControl = [[UIPageControl alloc] init];
-        [_pageControl setPageIndicatorTintColor:[UIColor colorGrayLine]];
-        [_pageControl setCurrentPageIndicatorTintColor:[UIColor grayColor]];
-        [_pageControl setHidesForSinglePage:YES];
-        [_pageControl addTarget:self action:@selector(pageControlChanged:) forControlEvents:UIControlEventValueChanged];
-    }
-    return _pageControl;
-}
-
 
 @end
