@@ -1,20 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment version="2304" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
-        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="WBGImageEditorViewController">
             <connections>
                 <outlet property="backButton" destination="U1E-fP-iEK" id="5iE-72-bQz"/>
-                <outlet property="colorPan" destination="sUm-KM-2Ao" id="aBq-pe-bzS"/>
                 <outlet property="drawModeSaveBtn" destination="J7o-jv-iM1" id="AID-bc-pTP"/>
+                <outlet property="hzColorPan" destination="ybm-aD-OLl" id="VfK-T7-7ve"/>
                 <outlet property="imageView" destination="L0E-Hz-dO7" id="8Uo-zs-uHX"/>
                 <outlet property="panButton" destination="vif-ym-mAZ" id="dhq-qL-UOU"/>
                 <outlet property="paperButton" destination="dR4-MJ-4Kq" id="ljA-cj-EGo"/>
@@ -191,15 +190,14 @@
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="H4n-yc-FcR" firstAttribute="trailing" secondItem="1m7-DB-IxR" secondAttribute="trailing" id="5Xp-Ud-dYk"/>
-                <constraint firstItem="H4n-yc-FcR" firstAttribute="leading" secondItem="1m7-DB-IxR" secondAttribute="leading" id="T6y-gH-cJm"/>
+                <constraint firstItem="H4n-yc-FcR" firstAttribute="trailing" secondItem="i5M-Pr-FkT" secondAttribute="trailing" id="5Xp-Ud-dYk"/>
+                <constraint firstItem="H4n-yc-FcR" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="T6y-gH-cJm"/>
                 <constraint firstItem="H4n-yc-FcR" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="Wor-oY-6q8"/>
-                <constraint firstItem="H4n-yc-FcR" firstAttribute="bottom" secondItem="1m7-DB-IxR" secondAttribute="bottom" id="ylf-ys-XpV"/>
+                <constraint firstItem="H4n-yc-FcR" firstAttribute="bottom" secondItem="i5M-Pr-FkT" secondAttribute="bottom" id="ylf-ys-XpV"/>
             </constraints>
-            <viewLayoutGuide key="safeArea" id="1m7-DB-IxR"/>
             <point key="canvasLocation" x="61" y="-225"/>
         </view>
-        <view contentMode="scaleToFill" id="sUm-KM-2Ao" customClass="WBGColorPan">
+        <view contentMode="scaleToFill" id="sUm-KM-2Ao">
             <rect key="frame" x="0.0" y="0.0" width="58" height="231"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
@@ -218,9 +216,6 @@
                                     <real key="value" value="9"/>
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
-                            <connections>
-                                <action selector="buttonAction:" destination="sUm-KM-2Ao" eventType="touchUpInside" id="x8i-QE-wxO"/>
-                            </connections>
                         </button>
                         <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HeF-yt-Z8j" customClass="ColorfullButton">
                             <rect key="frame" x="-17" y="59" width="60" height="30"/>
@@ -233,9 +228,6 @@
                                     <real key="value" value="9"/>
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
-                            <connections>
-                                <action selector="buttonAction:" destination="sUm-KM-2Ao" eventType="touchUpInside" id="Lea-UL-gb3"/>
-                            </connections>
                         </button>
                         <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="euk-3V-EoP" customClass="ColorfullButton">
                             <rect key="frame" x="-17" y="89" width="60" height="30"/>
@@ -248,9 +240,6 @@
                                     <color key="value" red="0.0" green="0.90588235294117647" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
-                            <connections>
-                                <action selector="buttonAction:" destination="sUm-KM-2Ao" eventType="touchUpInside" id="vBb-Fm-d0b"/>
-                            </connections>
                         </button>
                         <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hMN-2V-GUp" customClass="ColorfullButton">
                             <rect key="frame" x="-17" y="119" width="60" height="30"/>
@@ -263,9 +252,6 @@
                                     <color key="value" red="0.098039215686274508" green="0.55686274509803924" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
-                            <connections>
-                                <action selector="buttonAction:" destination="sUm-KM-2Ao" eventType="touchUpInside" id="02j-V5-DUd"/>
-                            </connections>
                         </button>
                         <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M7o-ZX-cck" customClass="ColorfullButton">
                             <rect key="frame" x="-17" y="149" width="60" height="30"/>
@@ -278,9 +264,6 @@
                                     <color key="value" red="0.98039215686274506" green="0.1764705882352941" blue="0.41176470588235292" alpha="1" colorSpace="calibratedRGB"/>
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
-                            <connections>
-                                <action selector="buttonAction:" destination="sUm-KM-2Ao" eventType="touchUpInside" id="7ec-VQ-hpw"/>
-                            </connections>
                         </button>
                         <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zab-z4-Cs1" customClass="ColorfullButton">
                             <rect key="frame" x="-17" y="179" width="60" height="30"/>
@@ -293,9 +276,6 @@
                                     <color key="value" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
-                            <connections>
-                                <action selector="buttonAction:" destination="sUm-KM-2Ao" eventType="touchUpInside" id="p8S-xb-54A"/>
-                            </connections>
                         </button>
                         <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kZF-rI-xHP" customClass="ColorfullButton">
                             <rect key="frame" x="-17" y="0.0" width="60" height="30"/>
@@ -308,9 +288,6 @@
                                     <real key="value" value="9"/>
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
-                            <connections>
-                                <action selector="buttonAction:" destination="sUm-KM-2Ao" eventType="touchUpInside" id="ZhU-vf-xyx"/>
-                            </connections>
                         </button>
                     </subviews>
                     <color key="backgroundColor" red="0.086274509803921567" green="0.098039215686274508" blue="0.10196078431372549" alpha="0.29799871575342468" colorSpace="calibratedRGB"/>
@@ -324,24 +301,39 @@
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <viewLayoutGuide key="safeArea" id="eEE-RG-qgN"/>
-            <connections>
-                <outlet property="blueButton" destination="hMN-2V-GUp" id="PMg-WS-yFm"/>
-                <outlet property="greenButton" destination="euk-3V-EoP" id="ZvG-lz-oJo"/>
-                <outlet property="orangeButton" destination="bvM-QN-XqK" id="OBW-P8-YLC"/>
-                <outlet property="pinkButton" destination="M7o-ZX-cck" id="N6Z-Eb-CTI"/>
-                <outlet property="redButton" destination="kZF-rI-xHP" id="1bc-OG-DJZ"/>
-                <outlet property="whiteButton" destination="zab-z4-Cs1" id="N7w-sT-oye"/>
-                <outlet property="yellowButton" destination="HeF-yt-Z8j" id="yVL-7X-fvF"/>
-                <outletCollection property="colorButtons" destination="kZF-rI-xHP" id="oBX-mt-AwY"/>
-                <outletCollection property="colorButtons" destination="bvM-QN-XqK" id="zWG-BQ-Lgd"/>
-                <outletCollection property="colorButtons" destination="HeF-yt-Z8j" id="AmV-gx-CJJ"/>
-                <outletCollection property="colorButtons" destination="euk-3V-EoP" id="jA0-a5-YUq"/>
-                <outletCollection property="colorButtons" destination="hMN-2V-GUp" id="ffX-bz-AiX"/>
-                <outletCollection property="colorButtons" destination="M7o-ZX-cck" id="uIM-Xx-XaI"/>
-                <outletCollection property="colorButtons" destination="zab-z4-Cs1" id="jwf-eL-abx"/>
-            </connections>
             <point key="canvasLocation" x="-397" y="93.5"/>
+        </view>
+        <view contentMode="scaleToFill" id="ybm-aD-OLl" customClass="WBGCustomColorPan">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="URD-FD-X46">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="h24-s4-zfj">
+                        <size key="itemSize" width="32" height="32"/>
+                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    </collectionViewFlowLayout>
+                    <connections>
+                        <outlet property="dataSource" destination="ybm-aD-OLl" id="6lh-i7-dgE"/>
+                        <outlet property="delegate" destination="ybm-aD-OLl" id="z56-EO-WAi"/>
+                    </connections>
+                </collectionView>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="URD-FD-X46" secondAttribute="bottom" id="1v7-vZ-Sng"/>
+                <constraint firstAttribute="trailing" secondItem="URD-FD-X46" secondAttribute="trailing" id="fBj-kb-rPl"/>
+                <constraint firstItem="URD-FD-X46" firstAttribute="leading" secondItem="ybm-aD-OLl" secondAttribute="leading" id="kgM-af-DIP"/>
+                <constraint firstItem="URD-FD-X46" firstAttribute="top" secondItem="ybm-aD-OLl" secondAttribute="top" id="qQw-BQ-Shu"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="contentView" destination="URD-FD-X46" id="9t1-cg-cUf"/>
+            </connections>
+            <point key="canvasLocation" x="-536" y="-971"/>
         </view>
     </objects>
     <resources>
