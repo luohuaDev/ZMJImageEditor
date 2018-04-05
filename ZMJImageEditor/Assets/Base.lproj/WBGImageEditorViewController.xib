@@ -12,12 +12,14 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="WBGImageEditorViewController">
             <connections>
                 <outlet property="backButton" destination="U1E-fP-iEK" id="5iE-72-bQz"/>
+                <outlet property="backImage" destination="Wqo-g4-K1W" id="cRl-bq-bia"/>
                 <outlet property="hzColorPan" destination="ybm-aD-OLl" id="VfK-T7-7ve"/>
                 <outlet property="imageView" destination="L0E-Hz-dO7" id="8Uo-zs-uHX"/>
                 <outlet property="scrollView" destination="eg2-dz-mJn" id="syX-xc-Eiv"/>
                 <outlet property="sendButton" destination="Li1-F3-HD7" id="ILa-6f-mdo"/>
                 <outlet property="sendButtonLab" destination="vNi-rU-irR" id="YWT-GD-lhG"/>
                 <outlet property="undoButton" destination="yeV-aj-vVt" id="CuD-0G-Osx"/>
+                <outlet property="undoLab" destination="5vv-4W-zlV" id="dws-u3-GzK"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -55,6 +57,13 @@
                                 <outlet property="delegate" destination="-1" id="mbf-P5-HRA"/>
                             </connections>
                         </scrollView>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Edit_back" translatesAutoresizingMaskIntoConstraints="NO" id="Wqo-g4-K1W" userLabel="Back Image">
+                            <rect key="frame" x="15" y="19" width="26" height="26"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="26" id="Sxk-4Q-KGX"/>
+                                <constraint firstAttribute="height" constant="26" id="WDd-Fw-254"/>
+                            </constraints>
+                        </imageView>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U1E-fP-iEK">
                             <rect key="frame" x="0.0" y="0.0" width="58" height="58"/>
                             <constraints>
@@ -62,7 +71,7 @@
                                 <constraint firstAttribute="width" constant="58" id="ujy-Qb-a6y"/>
                             </constraints>
                             <inset key="titleEdgeInsets" minX="0.0" minY="14" maxX="0.0" maxY="0.0"/>
-                            <state key="normal" image="Edit_back">
+                            <state key="normal">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <state key="disabled">
@@ -72,14 +81,25 @@
                                 <action selector="backAction:" destination="-1" eventType="touchUpInside" id="Ppf-jM-RIP"/>
                             </connections>
                         </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Undo" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5vv-4W-zlV" userLabel="Undo Lab">
+                            <rect key="frame" x="319.5" y="19" width="42" height="26"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="26" id="tmJ-7Q-Fxa"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                            <color key="shadowColor" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="calibratedRGB"/>
+                        </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yeV-aj-vVt">
                             <rect key="frame" x="317" y="0.0" width="58" height="58"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="58" id="1tJ-SH-tcY"/>
                                 <constraint firstAttribute="height" constant="58" id="lJo-i2-5Eg"/>
                             </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <inset key="titleEdgeInsets" minX="0.0" minY="14" maxX="0.0" maxY="0.0"/>
-                            <state key="normal" image="Edit_undo">
+                            <state key="normal">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <state key="disabled">
@@ -111,6 +131,7 @@
                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
+                            <color key="shadowColor" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="calibratedRGB"/>
                         </label>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -122,11 +143,15 @@
                         <constraint firstItem="eg2-dz-mJn" firstAttribute="top" secondItem="H4n-yc-FcR" secondAttribute="top" id="J9K-nJ-E6y"/>
                         <constraint firstItem="U1E-fP-iEK" firstAttribute="top" secondItem="H4n-yc-FcR" secondAttribute="top" id="Nqb-6f-hqS"/>
                         <constraint firstAttribute="bottom" secondItem="eg2-dz-mJn" secondAttribute="bottom" id="QTJ-8O-ejx"/>
+                        <constraint firstItem="Wqo-g4-K1W" firstAttribute="leading" secondItem="H4n-yc-FcR" secondAttribute="leading" constant="15" id="Spy-sS-lkT"/>
                         <constraint firstItem="yeV-aj-vVt" firstAttribute="top" secondItem="H4n-yc-FcR" secondAttribute="top" id="VbC-QR-xgJ"/>
                         <constraint firstItem="eg2-dz-mJn" firstAttribute="leading" secondItem="H4n-yc-FcR" secondAttribute="leading" id="bL6-cg-ksh"/>
                         <constraint firstItem="U1E-fP-iEK" firstAttribute="leading" secondItem="H4n-yc-FcR" secondAttribute="leading" id="fLU-X1-aw6"/>
                         <constraint firstAttribute="trailing" secondItem="vNi-rU-irR" secondAttribute="trailing" id="glN-WJ-Lad"/>
+                        <constraint firstAttribute="trailing" secondItem="5vv-4W-zlV" secondAttribute="trailing" constant="13.5" id="kUe-t0-KxF"/>
+                        <constraint firstItem="5vv-4W-zlV" firstAttribute="centerY" secondItem="Wqo-g4-K1W" secondAttribute="centerY" id="oUi-tW-JHq"/>
                         <constraint firstAttribute="trailing" secondItem="yeV-aj-vVt" secondAttribute="trailing" id="vsA-sM-Dp0"/>
+                        <constraint firstItem="Wqo-g4-K1W" firstAttribute="top" secondItem="H4n-yc-FcR" secondAttribute="top" constant="19" id="x2u-Zr-bbq"/>
                     </constraints>
                 </view>
             </subviews>
@@ -341,7 +366,6 @@
     </objects>
     <resources>
         <image name="Edit_back" width="26" height="26"/>
-        <image name="Edit_undo" width="25" height="25"/>
         <image name="Edit_upload" width="58" height="58"/>
     </resources>
 </document>

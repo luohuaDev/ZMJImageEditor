@@ -36,7 +36,10 @@ NSString * const kColorPanNotificaiton = @"kColorPanNotificaiton";
 @property (strong, nonatomic) IBOutlet WBGCustomColorPan *hzColorPan;
 
 @property (weak, nonatomic) IBOutlet UIButton *backButton;
+@property (weak, nonatomic) IBOutlet UIImageView *backImage;
+
 @property (weak, nonatomic) IBOutlet UIButton *undoButton;
+@property (weak, nonatomic) IBOutlet UILabel *undoLab;
 
 @property (weak, nonatomic) IBOutlet UIButton *sendButton;
 @property (weak, nonatomic) IBOutlet UILabel *sendButtonLab;
@@ -135,7 +138,10 @@ NSString * const kColorPanNotificaiton = @"kColorPanNotificaiton";
 //    self.drawModeSaveBtn.hidden = YES;
     
     self.backButton.hidden = NO;
+    self.backImage.hidden = NO;
+    
     self.undoButton.hidden = YES;
+    self.undoLab.hidden = YES;
     
     self.hzColorPan.hidden = NO;
     
@@ -210,10 +216,12 @@ NSString * const kColorPanNotificaiton = @"kColorPanNotificaiton";
             if(canPrev)
             {
                 weakSelf.undoButton.hidden = NO;
+                weakSelf.undoLab.hidden = NO;
             }
             else
             {
                 weakSelf.undoButton.hidden = YES;
+                weakSelf.undoLab.hidden = YES;
             }
             
             if(self.state == WBGImageEditorStateEditFeed)
@@ -641,6 +649,7 @@ NSString * const kColorPanNotificaiton = @"kColorPanNotificaiton";
     [self.drawTool drawLine];
     [_drawingView removeAllSubviews];
     self.undoButton.hidden = YES;
+    self.undoLab.hidden = YES;
 }
 
 - (void)cropViewController:(TOCropViewController *)cropViewController didFinishCancelled:(BOOL)cancelled {
@@ -671,6 +680,7 @@ NSString * const kColorPanNotificaiton = @"kColorPanNotificaiton";
             //self.panButton.selected = YES;
             if (self.drawTool.allLineMutableArray.count > 0) {
                 self.undoButton.hidden  = NO;
+                self.undoLab.hidden = NO;
             }
         }
             break;
@@ -680,6 +690,7 @@ NSString * const kColorPanNotificaiton = @"kColorPanNotificaiton";
         {
             //self.panButton.selected = NO;
             self.undoButton.hidden  = YES;
+            self.undoLab.hidden = YES;
         }
             break;
         default:
@@ -699,10 +710,12 @@ NSString * const kColorPanNotificaiton = @"kColorPanNotificaiton";
             //self.bottomBar.alpha = 0.0;
             //self.topBar.alpha = 0.0;
             self.backButton.alpha = 0.0;
+            self.backImage.alpha = 0.0;
             //self.panButton.alpha = 0.0;
             //self.textButton.alpha = 0.0;
             //self.paperButton.alpha = 0.0;
             self.undoButton.alpha = 0.0;
+            self.undoLab.alpha = 0.0;
             self.sendButton.alpha = 0.0;
             self.sendButtonLab.alpha = 0.0;
             //self.drawModeSaveBtn.alpha = 0.0;
@@ -713,10 +726,12 @@ NSString * const kColorPanNotificaiton = @"kColorPanNotificaiton";
             //self.bottomBar.alpha = 1.0;
             //self.topBar.alpha = 1.0;
             self.backButton.alpha = 1.0;
+            self.backImage.alpha = 1.0;
             //self.panButton.alpha = 1.0;
             //self.textButton.alpha = 1.0;
             //self.paperButton.alpha = 1.0;
             self.undoButton.alpha = 1.0;
+            self.undoLab.alpha = 1.0;
             self.sendButton.alpha = 1.0;
             self.sendButtonLab.alpha = 1.0;
             //self.drawModeSaveBtn.alpha = 1.0;
