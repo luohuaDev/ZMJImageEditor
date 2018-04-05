@@ -246,13 +246,68 @@
             <point key="canvasLocation" x="-397" y="93.5"/>
         </view>
         <view contentMode="scaleToFill" id="ybm-aD-OLl" customClass="WBGCustomColorPan">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
+            <rect key="frame" x="0.0" y="0.0" width="60" height="368"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="URD-FD-X46">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="80t-z0-kj6" userLabel="Page Control">
+                    <rect key="frame" x="48" y="158.5" width="7" height="51"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="R9X-M6-xfH" userLabel="Point0">
+                            <rect key="frame" x="0.0" y="5" width="7" height="7"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="7" id="Ldh-DE-Fqh"/>
+                                <constraint firstAttribute="width" constant="7" id="iNp-Ip-ooW"/>
+                            </constraints>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                    <real key="value" value="3.5"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                        </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AH0-9n-Nkg" userLabel="Point1">
+                            <rect key="frame" x="0.0" y="22" width="7" height="7"/>
+                            <color key="backgroundColor" red="0.84705882352941175" green="0.84705882352941175" blue="0.84705882352941175" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="7" id="EOW-pN-Ggr"/>
+                                <constraint firstAttribute="height" constant="7" id="ZkF-e2-Tjg"/>
+                            </constraints>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                    <real key="value" value="3.5"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                        </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jwu-Of-o5h" userLabel="Point2">
+                            <rect key="frame" x="0.0" y="39" width="7" height="7"/>
+                            <color key="backgroundColor" red="0.84705882352941175" green="0.84705882352941175" blue="0.84705882352941175" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="7" id="IBh-fF-u2e"/>
+                                <constraint firstAttribute="width" constant="7" id="LaR-rw-kho"/>
+                            </constraints>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                    <real key="value" value="3.5"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                        </view>
+                    </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="h24-s4-zfj">
+                    <constraints>
+                        <constraint firstItem="AH0-9n-Nkg" firstAttribute="top" secondItem="R9X-M6-xfH" secondAttribute="bottom" constant="10" id="Adf-wL-hF6"/>
+                        <constraint firstAttribute="height" constant="51" id="IcP-ol-2py"/>
+                        <constraint firstItem="R9X-M6-xfH" firstAttribute="centerX" secondItem="AH0-9n-Nkg" secondAttribute="centerX" id="K3P-nK-UYM"/>
+                        <constraint firstItem="jwu-Of-o5h" firstAttribute="top" secondItem="AH0-9n-Nkg" secondAttribute="bottom" constant="10" id="NS4-ts-bc1"/>
+                        <constraint firstItem="AH0-9n-Nkg" firstAttribute="centerY" secondItem="80t-z0-kj6" secondAttribute="centerY" id="OmD-vI-E2H"/>
+                        <constraint firstItem="jwu-Of-o5h" firstAttribute="centerX" secondItem="AH0-9n-Nkg" secondAttribute="centerX" id="lwJ-WX-oPm"/>
+                        <constraint firstAttribute="width" constant="7" id="odz-94-12w"/>
+                        <constraint firstItem="AH0-9n-Nkg" firstAttribute="centerX" secondItem="80t-z0-kj6" secondAttribute="centerX" id="t8P-m0-dXc"/>
+                    </constraints>
+                </view>
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="URD-FD-X46">
+                    <rect key="frame" x="0.0" y="0.0" width="60" height="368"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="h24-s4-zfj">
                         <size key="itemSize" width="32" height="32"/>
                         <size key="headerReferenceSize" width="0.0" height="0.0"/>
                         <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -268,12 +323,18 @@
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="URD-FD-X46" secondAttribute="bottom" id="1v7-vZ-Sng"/>
                 <constraint firstAttribute="trailing" secondItem="URD-FD-X46" secondAttribute="trailing" id="fBj-kb-rPl"/>
+                <constraint firstItem="80t-z0-kj6" firstAttribute="centerY" secondItem="ybm-aD-OLl" secondAttribute="centerY" id="g6R-1m-dYp"/>
+                <constraint firstAttribute="trailing" secondItem="80t-z0-kj6" secondAttribute="trailing" constant="5" id="gMa-wO-8Vu"/>
                 <constraint firstItem="URD-FD-X46" firstAttribute="leading" secondItem="ybm-aD-OLl" secondAttribute="leading" id="kgM-af-DIP"/>
                 <constraint firstItem="URD-FD-X46" firstAttribute="top" secondItem="ybm-aD-OLl" secondAttribute="top" id="qQw-BQ-Shu"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="contentView" destination="URD-FD-X46" id="9t1-cg-cUf"/>
+                <outlet property="pageControl" destination="80t-z0-kj6" id="9HZ-Px-3ZI"/>
+                <outlet property="point0" destination="R9X-M6-xfH" id="W2H-vo-aLa"/>
+                <outlet property="point1" destination="AH0-9n-Nkg" id="LBp-ZH-TLw"/>
+                <outlet property="point2" destination="jwu-Of-o5h" id="ptT-0D-WvT"/>
             </connections>
             <point key="canvasLocation" x="-536" y="-971"/>
         </view>

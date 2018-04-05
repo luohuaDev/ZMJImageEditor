@@ -9,7 +9,7 @@
 #import "WBGCustomColorPanCell.h"
 #import "Masonry.h"
 
-@interface WBGCustomColorPan ()
+@interface WBGCustomColorPan () <UIScrollViewDelegate>
 
 @property (nonatomic, assign) NSInteger selectIndex;
 @property (nonatomic, strong) NSMutableArray *colorArray;
@@ -20,7 +20,7 @@
 
 - (void)initAll
 {
-    self.currentColor = [UIColor redColor];
+    self.currentColor = [self colorWithHex:0xffffff alpha:1.0];
     
     self.selectIndex = 0;
     
@@ -76,16 +76,11 @@
     return 27;
 }
 
-- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
-{
-    return UIEdgeInsetsMake(0.0, 10.0, 0.0, 10.0);
-}
-
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
 {
-    CGFloat width = [[UIScreen mainScreen] bounds].size.width;
+    CGFloat h = 368.0;
     
-    return (width - 9 * 32 - 20.0) / 8;
+    return (h - 9 * 32.0) / 9.0;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
@@ -123,6 +118,46 @@
                            green:((float)((hexValue & 0xFF00) >> 8))/255.0
                             blue:((float)(hexValue & 0xFF))/255.0
                            alpha:alphaValue];
+}
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
+{
+    CGPoint offset = scrollView.contentOffset;
+    CGFloat y = offset.y;
+    [self updateupdatePageControlUI:y];
+}
+
+- (void)updateupdatePageControlUI:(CGFloat)y
+{
+    NSInteger index = 0;
+    if(y == 0)
+    {
+        index = 0;
+    }
+    if(y == 368)
+    {
+        index = 1;
+    }
+    if(y == 727)
+    {
+        index = 2;
+    }
+    
+    NSArray *points = [[NSArray alloc] initWithObjects:self.point0, self.point1, self.point2, nil];
+    
+    for(int i = 0; i < 3; i++)
+    {
+        UIView *point = [points objectAtIndex:i];
+        
+        UIColor *color = [self colorWithHex:0xd8d8d8 alpha:1.0];
+        
+        if(i == index)
+        {
+            color = [self colorWithHex:0xffffff alpha:1.0];
+        }
+        
+        [point setBackgroundColor:color];
+    }
 }
 
 @end

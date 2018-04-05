@@ -118,12 +118,10 @@ NSString * const kColorPanNotificaiton = @"kColorPanNotificaiton";
     [self.view addSubview:_colorPan];*/
     [self.view addSubview:self.hzColorPan];
     [self.hzColorPan mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.leading.equalTo(self.view);
+        make.top.equalTo(self.view).offset(150.0);
         make.trailing.equalTo(self.view);
-        //make.width.equalTo(@(245.0));
-        //make.centerX.equalTo(self.view);
-        make.height.equalTo(@(60.0));
-        make.bottom.equalTo(self.view);
+        make.height.equalTo(@(368.0));
+        make.width.equalTo(@(60.0));
     }];
     [self.hzColorPan initAll];
     
