@@ -239,7 +239,7 @@ NSString * const kColorPanNotificaiton = @"kColorPanNotificaiton";
             }
         };
         _drawTool.drawingCallback = ^(BOOL isDrawing) {
-            //[weakSelf hiddenTopAndBottomBar:isDrawing animation:YES];
+            [weakSelf hiddenTopAndBottomBar:isDrawing animation:YES];
         };
         _drawTool.drawingDidTap = ^(void) {
             for(UIView *subView in weakSelf.drawingView.subviews)
