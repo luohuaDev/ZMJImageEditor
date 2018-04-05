@@ -325,7 +325,7 @@ NSString * const kColorPanNotificaiton = @"kColorPanNotificaiton";
     
     _scrollView.contentSize = _imageView.frame.size;
     _scrollView.minimumZoomScale = 1;
-    _scrollView.maximumZoomScale = MAX(MAX(Rw, Rh), 3);
+    _scrollView.maximumZoomScale = 1;//MAX(MAX(Rw, Rh), 3);
     
     [_scrollView setZoomScale:_scrollView.minimumZoomScale animated:animated];
     [self scrollViewDidZoom:_scrollView];
