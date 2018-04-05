@@ -27,12 +27,11 @@ extern NSString * const kColorPanNotificaiton;
 */
 
 @interface WBGImageEditorViewController : WBGImageEditor
-@property (weak, nonatomic) IBOutlet UIButton *backButton;
-@property (weak, nonatomic) IBOutlet UIButton *undoButton;
 
 @property (weak,   nonatomic, readonly) IBOutlet UIImageView *imageView;
 @property (strong, nonatomic, readonly) IBOutlet UIImageView *drawingView;
 @property (weak,   nonatomic, readonly) IBOutlet UIScrollView *scrollView;
+
 //@property (strong, nonatomic, readonly) IBOutlet WBGColorPan *colorPan;
 @property (nonatomic, strong, readonly) IBOutlet WBGCustomColorPan *hzColorPan;
 

@@ -12,15 +12,11 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="WBGImageEditorViewController">
             <connections>
                 <outlet property="backButton" destination="U1E-fP-iEK" id="5iE-72-bQz"/>
-                <outlet property="drawModeSaveBtn" destination="J7o-jv-iM1" id="AID-bc-pTP"/>
                 <outlet property="hzColorPan" destination="ybm-aD-OLl" id="VfK-T7-7ve"/>
                 <outlet property="imageView" destination="L0E-Hz-dO7" id="8Uo-zs-uHX"/>
-                <outlet property="panButton" destination="vif-ym-mAZ" id="dhq-qL-UOU"/>
-                <outlet property="paperButton" destination="dR4-MJ-4Kq" id="ljA-cj-EGo"/>
                 <outlet property="scrollView" destination="eg2-dz-mJn" id="syX-xc-Eiv"/>
                 <outlet property="sendButton" destination="Li1-F3-HD7" id="ILa-6f-mdo"/>
                 <outlet property="sendButtonLab" destination="vNi-rU-irR" id="YWT-GD-lhG"/>
-                <outlet property="textButton" destination="cnm-kZ-dpx" id="Gv1-I7-f2Y"/>
                 <outlet property="undoButton" destination="yeV-aj-vVt" id="CuD-0G-Osx"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -59,46 +55,6 @@
                                 <outlet property="delegate" destination="-1" id="mbf-P5-HRA"/>
                             </connections>
                         </scrollView>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Li1-F3-HD7">
-                            <rect key="frame" x="317" y="593" width="58" height="58"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="58" id="YaN-tI-xHZ"/>
-                                <constraint firstAttribute="width" constant="58" id="p5O-Nm-PRM"/>
-                            </constraints>
-                            <state key="normal" image="Edit_upload">
-                                <color key="titleColor" red="0.15686274509803921" green="0.60784313725490191" blue="0.94117647058823528" alpha="1" colorSpace="calibratedRGB"/>
-                            </state>
-                            <connections>
-                                <action selector="sendAction:" destination="-1" eventType="touchUpInside" id="9Z9-uw-HJK"/>
-                            </connections>
-                        </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yeV-aj-vVt">
-                            <rect key="frame" x="0.0" y="0.0" width="58" height="58"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="58" id="1tJ-SH-tcY"/>
-                                <constraint firstAttribute="height" constant="58" id="lJo-i2-5Eg"/>
-                            </constraints>
-                            <inset key="titleEdgeInsets" minX="0.0" minY="14" maxX="0.0" maxY="0.0"/>
-                            <state key="normal" image="Edit_undo">
-                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <state key="disabled">
-                                <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <connections>
-                                <action selector="undoAction:" destination="-1" eventType="touchUpInside" id="MFr-PX-eOZ"/>
-                            </connections>
-                        </button>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="发送" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vNi-rU-irR" userLabel="Send Btn Lab">
-                            <rect key="frame" x="317" y="651" width="58" height="16"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="16" id="GwW-X1-Ag6"/>
-                                <constraint firstAttribute="width" constant="58" id="Hyz-UN-yD3"/>
-                            </constraints>
-                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            <nil key="highlightedColor"/>
-                        </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U1E-fP-iEK">
                             <rect key="frame" x="0.0" y="0.0" width="58" height="58"/>
                             <constraints>
@@ -116,65 +72,53 @@
                                 <action selector="backAction:" destination="-1" eventType="touchUpInside" id="Ppf-jM-RIP"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dR4-MJ-4Kq">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yeV-aj-vVt">
                             <rect key="frame" x="317" y="0.0" width="58" height="58"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="58" id="DMy-O5-jHp"/>
-                                <constraint firstAttribute="width" constant="58" id="rvx-Wl-0kb"/>
+                                <constraint firstAttribute="width" constant="58" id="1tJ-SH-tcY"/>
+                                <constraint firstAttribute="height" constant="58" id="lJo-i2-5Eg"/>
                             </constraints>
-                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
-                            <state key="normal" image="Edit_emoji"/>
+                            <inset key="titleEdgeInsets" minX="0.0" minY="14" maxX="0.0" maxY="0.0"/>
+                            <state key="normal" image="Edit_undo">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <state key="disabled">
+                                <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
                             <connections>
-                                <action selector="paperAction:" destination="-1" eventType="touchUpInside" id="uSp-LB-Pto"/>
+                                <action selector="undoAction:" destination="-1" eventType="touchUpInside" id="MFr-PX-eOZ"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vif-ym-mAZ">
-                            <rect key="frame" x="259" y="0.0" width="58" height="58"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Li1-F3-HD7">
+                            <rect key="frame" x="317" y="593" width="58" height="58"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="58" id="96B-KG-toc"/>
-                                <constraint firstAttribute="width" constant="58" id="oum-8i-FfN"/>
+                                <constraint firstAttribute="height" constant="58" id="YaN-tI-xHZ"/>
+                                <constraint firstAttribute="width" constant="58" id="p5O-Nm-PRM"/>
                             </constraints>
-                            <state key="normal" image="Edit_paint"/>
+                            <state key="normal" image="Edit_upload">
+                                <color key="titleColor" red="0.15686274509803921" green="0.60784313725490191" blue="0.94117647058823528" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
                             <connections>
-                                <action selector="panAction:" destination="-1" eventType="touchUpInside" id="CwB-Bi-vo0"/>
+                                <action selector="sendAction:" destination="-1" eventType="touchUpInside" id="9Z9-uw-HJK"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cnm-kZ-dpx">
-                            <rect key="frame" x="201" y="0.0" width="58" height="58"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="发送" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vNi-rU-irR" userLabel="Send Btn Lab">
+                            <rect key="frame" x="317" y="651" width="58" height="16"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="58" id="Ztk-hl-GIC"/>
-                                <constraint firstAttribute="width" constant="58" id="nHJ-Nd-jhw"/>
+                                <constraint firstAttribute="height" constant="16" id="GwW-X1-Ag6"/>
+                                <constraint firstAttribute="width" constant="58" id="Hyz-UN-yD3"/>
                             </constraints>
-                            <state key="normal" image="Edit_text"/>
-                            <state key="selected" image="text_selected"/>
-                            <connections>
-                                <action selector="textAction:" destination="-1" eventType="touchUpInside" id="oFt-qU-bGu"/>
-                            </connections>
-                        </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J7o-jv-iM1" userLabel="Draw Mode Save Btn">
-                            <rect key="frame" x="317" y="0.0" width="58" height="58"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="58" id="KxN-Wz-vIg"/>
-                                <constraint firstAttribute="height" constant="58" id="a7C-l2-EcW"/>
-                            </constraints>
-                            <state key="normal" title="Save"/>
-                            <connections>
-                                <action selector="onClickDrawModeSaveBtn:" destination="-1" eventType="touchUpInside" id="Suu-AC-fFM"/>
-                            </connections>
-                        </button>
+                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstItem="J7o-jv-iM1" firstAttribute="top" secondItem="H4n-yc-FcR" secondAttribute="top" id="0AO-Yk-i7n"/>
-                        <constraint firstItem="cnm-kZ-dpx" firstAttribute="top" secondItem="H4n-yc-FcR" secondAttribute="top" id="4oj-Gd-SRM"/>
                         <constraint firstItem="vNi-rU-irR" firstAttribute="top" secondItem="Li1-F3-HD7" secondAttribute="bottom" id="7ct-Dn-sEw"/>
-                        <constraint firstItem="dR4-MJ-4Kq" firstAttribute="leading" secondItem="vif-ym-mAZ" secondAttribute="trailing" id="8oV-nW-4ix"/>
                         <constraint firstAttribute="trailing" secondItem="eg2-dz-mJn" secondAttribute="trailing" id="A11-hY-5UT"/>
-                        <constraint firstAttribute="trailing" secondItem="dR4-MJ-4Kq" secondAttribute="trailing" id="GVg-J9-I3v"/>
-                        <constraint firstItem="yeV-aj-vVt" firstAttribute="leading" secondItem="H4n-yc-FcR" secondAttribute="leading" id="Gxb-bo-QdI"/>
                         <constraint firstAttribute="bottom" secondItem="vNi-rU-irR" secondAttribute="bottom" id="HBO-FW-fEN"/>
                         <constraint firstAttribute="trailing" secondItem="Li1-F3-HD7" secondAttribute="trailing" id="Hmq-h2-zkv"/>
-                        <constraint firstItem="vif-ym-mAZ" firstAttribute="top" secondItem="H4n-yc-FcR" secondAttribute="top" id="Iol-Lx-6O6"/>
                         <constraint firstItem="eg2-dz-mJn" firstAttribute="top" secondItem="H4n-yc-FcR" secondAttribute="top" id="J9K-nJ-E6y"/>
                         <constraint firstItem="U1E-fP-iEK" firstAttribute="top" secondItem="H4n-yc-FcR" secondAttribute="top" id="Nqb-6f-hqS"/>
                         <constraint firstAttribute="bottom" secondItem="eg2-dz-mJn" secondAttribute="bottom" id="QTJ-8O-ejx"/>
@@ -182,9 +126,7 @@
                         <constraint firstItem="eg2-dz-mJn" firstAttribute="leading" secondItem="H4n-yc-FcR" secondAttribute="leading" id="bL6-cg-ksh"/>
                         <constraint firstItem="U1E-fP-iEK" firstAttribute="leading" secondItem="H4n-yc-FcR" secondAttribute="leading" id="fLU-X1-aw6"/>
                         <constraint firstAttribute="trailing" secondItem="vNi-rU-irR" secondAttribute="trailing" id="glN-WJ-Lad"/>
-                        <constraint firstAttribute="trailing" secondItem="J7o-jv-iM1" secondAttribute="trailing" id="i5l-sM-h5G"/>
-                        <constraint firstItem="vif-ym-mAZ" firstAttribute="leading" secondItem="cnm-kZ-dpx" secondAttribute="trailing" id="mQL-bt-VgO"/>
-                        <constraint firstItem="dR4-MJ-4Kq" firstAttribute="top" secondItem="H4n-yc-FcR" secondAttribute="top" id="yBS-b2-2DO"/>
+                        <constraint firstAttribute="trailing" secondItem="yeV-aj-vVt" secondAttribute="trailing" id="vsA-sM-Dp0"/>
                     </constraints>
                 </view>
             </subviews>
@@ -338,11 +280,7 @@
     </objects>
     <resources>
         <image name="Edit_back" width="26" height="26"/>
-        <image name="Edit_emoji" width="30" height="30"/>
-        <image name="Edit_paint" width="30" height="30"/>
-        <image name="Edit_text" width="30" height="30"/>
         <image name="Edit_undo" width="25" height="25"/>
         <image name="Edit_upload" width="58" height="58"/>
-        <image name="text_selected" width="32" height="32"/>
     </resources>
 </document>

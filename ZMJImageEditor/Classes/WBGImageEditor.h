@@ -29,7 +29,7 @@ typedef NS_OPTIONS(NSInteger, WBGImageEditorComponent) {
                                  | WBGImageEditorPaperComponent
                                  | WBGImageEditorColorPanComponent,
     //My Custom
-    WBGImageEditorCustomComponent = WBGImageEditorDrawComponent | WBGImageEditorTextComponent | WBGImageEditorPaperComponent | WBGImageEditorColorPanComponent,
+    WBGImageEditorCustomComponent = WBGImageEditorDrawComponent | WBGImageEditorColorPanComponent,
 };
 
 @interface WBGImageEditor : UIViewController

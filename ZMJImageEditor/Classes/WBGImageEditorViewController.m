@@ -21,6 +21,7 @@
 #import "YYCategories.h"
 
 NSString * const kColorPanNotificaiton = @"kColorPanNotificaiton";
+
 #pragma mark - WBGImageEditorViewController
 
 @interface WBGImageEditorViewController () <UINavigationBarDelegate, UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBGKeyboardDelegate>
@@ -30,16 +31,20 @@ NSString * const kColorPanNotificaiton = @"kColorPanNotificaiton";
 @property (weak,   nonatomic) IBOutlet UIImageView *imageView;
 @property (strong, nonatomic) IBOutlet UIImageView *drawingView;
 @property (weak,   nonatomic) IBOutlet UIScrollView *scrollView;
+
 //@property (strong, nonatomic) IBOutlet WBGColorPan *colorPan;
 @property (strong, nonatomic) IBOutlet WBGCustomColorPan *hzColorPan;
 
+@property (weak, nonatomic) IBOutlet UIButton *backButton;
+@property (weak, nonatomic) IBOutlet UIButton *undoButton;
+
 @property (weak, nonatomic) IBOutlet UIButton *sendButton;
 @property (weak, nonatomic) IBOutlet UILabel *sendButtonLab;
-@property (weak, nonatomic) IBOutlet UIButton *panButton;
-@property (weak, nonatomic) IBOutlet UIButton *drawModeSaveBtn;
-@property (weak, nonatomic) IBOutlet UIButton *textButton;
-@property (weak, nonatomic) IBOutlet UIButton *clipButton;
-@property (weak, nonatomic) IBOutlet UIButton *paperButton;
+//@property (weak, nonatomic) IBOutlet UIButton *panButton;
+//@property (weak, nonatomic) IBOutlet UIButton *drawModeSaveBtn;
+//@property (weak, nonatomic) IBOutlet UIButton *textButton;
+//@property (weak, nonatomic) IBOutlet UIButton *clipButton;
+//@property (weak, nonatomic) IBOutlet UIButton *paperButton;
 
 @property (nonatomic, strong) WBGDrawTool *drawTool;
 @property (nonatomic, strong) WBGTextTool *textTool;
@@ -98,11 +103,10 @@ NSString * const kColorPanNotificaiton = @"kColorPanNotificaiton";
     return self;
 }
 
-- (void)viewDidLoad {
+#pragma mark - life cycle
+- (void)viewDidLoad
+{
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
-    
-    self.undoButton.hidden = YES;
     
     /*
     CGFloat tempColorPanX = ([UIScreen mainScreen].bounds.size.width - self.colorPan.bounds.size.width) / 2.0;
@@ -125,60 +129,52 @@ NSString * const kColorPanNotificaiton = @"kColorPanNotificaiton";
     
     [self initImageScrollView];
     
-    /*
-    这里一进来 会进入EditorDrawMode 涂鸦模式
-    @weakify(self);
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        @strongify(self)
-        if ([self.dataSource respondsToSelector:@selector(imageEditorCompoment)] && [self.dataSource imageEditorCompoment] & WBGImageEditorDrawComponent) {
-            [self.panButton sendActionsForControlEvents:UIControlEventTouchUpInside];
-        }
-    });*/
+//    self.panButton.hidden = YES;
+//    self.textButton.hidden = YES;
+//    self.clipButton.hidden = YES;
+//    self.paperButton.hidden = YES;
+//    self.hzColorPan.hidden = YES;
+//    self.drawModeSaveBtn.hidden = YES;
     
-    self.panButton.hidden = YES;
-    self.textButton.hidden = YES;
-    self.clipButton.hidden = YES;
-    self.paperButton.hidden = YES;
-    self.hzColorPan.hidden = YES;
-    self.drawModeSaveBtn.hidden = YES;
+    self.backButton.hidden = NO;
+    self.undoButton.hidden = YES;
+    
+    self.hzColorPan.hidden = NO;
+    
+    self.sendButton.hidden = NO;
+    self.sendButtonLab.hidden = NO;
     
     if(self.state == WBGImageEditorStateEditFeed)
     {
         self.sendButton.hidden = YES;
         self.sendButtonLab.hidden = YES;
     }
+    
+    @weakify(self);
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        @strongify(self)
+        if([self.dataSource respondsToSelector:@selector(imageEditorCompoment)] &&
+           [self.dataSource imageEditorCompoment] & WBGImageEditorDrawComponent)
+        {
+            [self panAction:nil];
+        }
+    });
 }
 
-- (void)viewWillAppear:(BOOL)animated {
+- (void)viewWillAppear:(BOOL)animated
+{
     [super viewWillAppear:animated];
     
-    //ShowBusyIndicatorForView(self.view);
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-      //  HideBusyIndicatorForView(self.view);
         [self refreshImageView];
     });
     
-    //获取自定制组件 - fecth custom config
     [self configCustomComponent];
 }
 
-- (void)configCustomComponent {
-    NSMutableArray *valibleCompoment = NSMutableArray.new;
-    WBGImageEditorComponent curComponent = [self.dataSource respondsToSelector:@selector(imageEditorCompoment)] ? [self.dataSource imageEditorCompoment] : 0;
-    if (curComponent == 0) { curComponent = WBGImageEditorWholeComponent; }
-    if (curComponent & WBGImageEditorDrawComponent) { self.panButton.hidden = NO; [valibleCompoment addObject:self.panButton]; }
-    if (curComponent & WBGImageEditorTextComponent) { self.textButton.hidden = NO; [valibleCompoment addObject:self.textButton]; }
-    if (curComponent & WBGImageEditorClipComponent) { self.clipButton.hidden = NO; [valibleCompoment addObject:self.clipButton]; }
-    if (curComponent & WBGImageEditorPaperComponent) { self.paperButton.hidden = NO; [valibleCompoment addObject:self.paperButton]; }
-    if (curComponent & WBGImageEditorColorPanComponent) { self.hzColorPan.hidden = YES;
-        self.drawModeSaveBtn.hidden = YES;
-    }
-    
-    [valibleCompoment enumerateObjectsUsingBlock:^(UIButton * _Nonnull button, NSUInteger idx, BOOL * _Nonnull stop) {
-        CGRect originFrame = button.frame;
-        originFrame.origin.x = idx == 0 ?(idx + 1) * 30.f : (idx + 1) * 30.f + originFrame.size.width * idx;
-        button.frame = originFrame;
-    }];
+- (void)configCustomComponent
+{
+    //WBGImageEditorComponent curComponent = WBGImageEditorCustomComponent;
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -213,10 +209,27 @@ NSString * const kColorPanNotificaiton = @"kColorPanNotificaiton";
         
         __weak typeof(self)weakSelf = self;
         _drawTool.drawToolStatus = ^(BOOL canPrev) {
-            if (canPrev) {
+            if(canPrev)
+            {
                 weakSelf.undoButton.hidden = NO;
-            } else {
+            }
+            else
+            {
                 weakSelf.undoButton.hidden = YES;
+            }
+            
+            if(self.state == WBGImageEditorStateEditFeed)
+            {
+                if(canPrev)
+                {
+                    weakSelf.sendButton.hidden = NO;
+                    weakSelf.sendButtonLab.hidden = NO;
+                }
+                else
+                {
+                    weakSelf.sendButton.hidden = YES;
+                    weakSelf.sendButtonLab.hidden = YES;
+                }
             }
         };
         _drawTool.drawingCallback = ^(BOOL isDrawing) {
@@ -434,12 +447,12 @@ NSString * const kColorPanNotificaiton = @"kColorPanNotificaiton";
     
     [self hiddenColorPan:NO animation:YES];
     
-    self.backButton.hidden = YES;
-    self.textButton.hidden = YES;
-    self.panButton.hidden = YES;
-    self.paperButton.hidden = YES;
+    //self.backButton.hidden = YES;
+    //self.textButton.hidden = YES;
+    //self.panButton.hidden = YES;
+    //self.paperButton.hidden = YES;
     
-    self.drawModeSaveBtn.hidden = NO;
+    //self.drawModeSaveBtn.hidden = NO;
 }
 
 //涂鸦模式结束
@@ -451,12 +464,12 @@ NSString * const kColorPanNotificaiton = @"kColorPanNotificaiton";
     
     [self hiddenColorPan:YES animation:YES];
     
-    self.backButton.hidden = NO;
-    self.textButton.hidden = NO;
-    self.panButton.hidden = NO;
-    self.paperButton.hidden = NO;
+    //self.backButton.hidden = NO;
+    //self.textButton.hidden = NO;
+    //self.panButton.hidden = NO;
+    //self.paperButton.hidden = NO;
     
-    self.drawModeSaveBtn.hidden = YES;
+    //self.drawModeSaveBtn.hidden = YES;
     
     [self calEditStateSendBtnShow];
 }
@@ -657,7 +670,7 @@ NSString * const kColorPanNotificaiton = @"kColorPanNotificaiton";
     switch (_currentMode) {
         case EditorDrawMode:
         {
-            self.panButton.selected = YES;
+            //self.panButton.selected = YES;
             if (self.drawTool.allLineMutableArray.count > 0) {
                 self.undoButton.hidden  = NO;
             }
@@ -667,7 +680,7 @@ NSString * const kColorPanNotificaiton = @"kColorPanNotificaiton";
         case EditorClipMode:
         case EditorNonMode:
         {
-            self.panButton.selected = NO;
+            //self.panButton.selected = NO;
             self.undoButton.hidden  = YES;
         }
             break;
@@ -688,13 +701,13 @@ NSString * const kColorPanNotificaiton = @"kColorPanNotificaiton";
             //self.bottomBar.alpha = 0.0;
             //self.topBar.alpha = 0.0;
             self.backButton.alpha = 0.0;
-            self.panButton.alpha = 0.0;
-            self.textButton.alpha = 0.0;
-            self.paperButton.alpha = 0.0;
+            //self.panButton.alpha = 0.0;
+            //self.textButton.alpha = 0.0;
+            //self.paperButton.alpha = 0.0;
             self.undoButton.alpha = 0.0;
             self.sendButton.alpha = 0.0;
             self.sendButtonLab.alpha = 0.0;
-            self.drawModeSaveBtn.alpha = 0.0;
+            //self.drawModeSaveBtn.alpha = 0.0;
             self.hzColorPan.alpha = 0.0;
         }
         else
@@ -702,13 +715,13 @@ NSString * const kColorPanNotificaiton = @"kColorPanNotificaiton";
             //self.bottomBar.alpha = 1.0;
             //self.topBar.alpha = 1.0;
             self.backButton.alpha = 1.0;
-            self.panButton.alpha = 1.0;
-            self.textButton.alpha = 1.0;
-            self.paperButton.alpha = 1.0;
+            //self.panButton.alpha = 1.0;
+            //self.textButton.alpha = 1.0;
+            //self.paperButton.alpha = 1.0;
             self.undoButton.alpha = 1.0;
             self.sendButton.alpha = 1.0;
             self.sendButtonLab.alpha = 1.0;
-            self.drawModeSaveBtn.alpha = 1.0;
+            //self.drawModeSaveBtn.alpha = 1.0;
             self.hzColorPan.alpha = 1.0;
         }
         _barsHiddenStatus = isHide;
