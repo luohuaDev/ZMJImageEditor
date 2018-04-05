@@ -1,5 +1,6 @@
-"vNi-rU-irR.normalTitle" = "发送";
 
-"U1E-fP-iEK.normalTitle" = "返回";
+/* Class = "UILabel"; text = "Undo"; ObjectID = "5vv-4W-zlV"; */
+"5vv-4W-zlV.text" = "撤销";
 
-"5vv-4W-zlV.normalTitle" = "撤销";
+/* Class = "UILabel"; text = "发送"; ObjectID = "vNi-rU-irR"; */
+"vNi-rU-irR.text" = "发送";
