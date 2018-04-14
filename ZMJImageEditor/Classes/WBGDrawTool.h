@@ -17,15 +17,22 @@
 @property (nonatomic, assign) CGFloat pathWidth;
 //撤销
 - (void)backToLastDraw;
-- (void)drawLine;
+- (void)drawLinePathEx;
 @end
 
 #pragma mark - HBPath
 @interface WBGPath : NSObject
+
 @property (nonatomic, strong) CAShapeLayer *shape;
 @property (nonatomic, strong) UIColor *pathColor;//画笔颜色
 
 + (instancetype)pathToPoint:(CGPoint)beginPoint pathWidth:(CGFloat)pathWidth;
-- (void)pathLineToPoint:(CGPoint)movePoint;//画
 - (void)drawPath;//绘制
+
+//参考
+- (void)pathExTouchesBegan:(CGPoint)point;
+- (void)pathExTouchesMoved:(CGPoint)point;
+
+@property (nonatomic, weak) WBGDrawTool *superState;
+
 @end

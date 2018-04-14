@@ -11,92 +11,114 @@
 #import "WBGTextToolView.h"
 
 @interface WBGDrawTool ()
+
 @property (nonatomic, strong) UIPanGestureRecognizer *panGesture;
 @property (nonatomic, strong) UITapGestureRecognizer *tapGesture;
+
 @end
-@implementation WBGDrawTool {
-    __weak UIImageView        *_drawingView;
-    CGSize                     _originalImageSize;
+
+@implementation WBGDrawTool
+{
+    __weak UIImageView *_drawingView;
+    CGSize _originalImageSize;
 }
 
-- (instancetype)initWithImageEditor:(WBGImageEditorViewController *)editor {
+- (instancetype)initWithImageEditor:(WBGImageEditorViewController *)editor
+{
     self = [super init];
-    if(self) {
-        self.editor   = editor;
-        _allLineMutableArray = [NSMutableArray new];
+    
+    if(self)
+    {
+        self.editor = editor;
+        
+        _allLineMutableArray = [NSMutableArray new];//这个数组里的每个元素代表一条划线
     }
+    
     return self;
 }
 
 - (void)backToLastDraw
 {
     [_allLineMutableArray removeLastObject];
-    [self drawLine];
-    if (self.drawToolStatus) {
+    
+    [self drawLinePathEx];
+    
+    if(self.drawToolStatus)
+    {
         self.drawToolStatus(_allLineMutableArray.count > 0 ? : NO);
     }
 }
 
 #pragma mark - Gesture
 //tap
-- (void)drawingViewDidTap:(UITapGestureRecognizer *)sender {
-    if (self.drawingDidTap) {
+- (void)drawingViewDidTap:(UITapGestureRecognizer *)sender
+{
+    if(self.drawingDidTap)
+    {
         self.drawingDidTap();
     }
 }
 
 //draw
-- (void)drawingViewDidPan:(UIPanGestureRecognizer*)sender
+- (void)drawingViewDidPan:(UIPanGestureRecognizer *)sender
 {
     CGPoint currentDraggingPosition = [sender locationInView:_drawingView];
     
-    if(sender.state == UIGestureRecognizerStateBegan) {
-        //取消所有加入文字激活状态
-        for (UIView *subView in self.editor.drawingView.subviews) {
-            if ([subView isKindOfClass:[WBGTextToolView class]]) {
+    if(sender.state == UIGestureRecognizerStateBegan)
+    {
+        for(UIView *subView in self.editor.drawingView.subviews)
+        {
+            if([subView isKindOfClass:[WBGTextToolView class]])
+            {
                 [WBGTextToolView setInactiveTextView:(WBGTextToolView *)subView];
             }
         }
         
-        // 初始化一个UIBezierPath对象, 把起始点存储到UIBezierPath对象中, 用来存储所有的轨迹点
         WBGPath *path = [WBGPath pathToPoint:currentDraggingPosition pathWidth:MAX(1, self.pathWidth)];
-        path.pathColor         = self.editor.hzColorPan.currentColor;
-        path.shape.strokeColor = self.editor.hzColorPan.currentColor.CGColor;
+        
+        path.pathColor = self.editor.hzColorPan.currentColor;
+        
+        path.superState = self;
+        
         [_allLineMutableArray addObject:path];
         
+        [path pathExTouchesBegan:currentDraggingPosition];
     }
     
-    if(sender.state == UIGestureRecognizerStateChanged) {
-        // 获得数组中的最后一个UIBezierPath对象(因为我们每次都把UIBezierPath存入到数组最后一个,因此获取时也取最后一个)
+    if(sender.state == UIGestureRecognizerStateChanged)
+    {
         WBGPath *path = [_allLineMutableArray lastObject];
-        [path pathLineToPoint:currentDraggingPosition];//添加点
-        [self drawLine];
         
-        if (self.drawingCallback) {
+        [path pathExTouchesMoved:currentDraggingPosition];
+        
+        if(self.drawingCallback)
+        {
             self.drawingCallback(YES);
         }
     }
     
-    if (sender.state == UIGestureRecognizerStateEnded) {
-        if (self.drawToolStatus) {
+    if(sender.state == UIGestureRecognizerStateEnded)
+    {
+        if(self.drawToolStatus)
+        {
             self.drawToolStatus(_allLineMutableArray.count > 0 ? : NO);
         }
         
-        if (self.drawingCallback) {
+        if(self.drawingCallback)
+        {
             self.drawingCallback(NO);
         }
     }
 }
 
-- (void)drawLine {
+- (void)drawLinePathEx
+{
     CGSize size = _drawingView.frame.size;
-    UIGraphicsBeginImageContextWithOptions(size, NO, 0.0);
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    //去掉锯齿
-    CGContextSetAllowsAntialiasing(context, true);
-    CGContextSetShouldAntialias(context, true);
     
-    for (WBGPath *path in _allLineMutableArray) {
+    UIGraphicsBeginImageContextWithOptions(size, NO, 0.0);
+    
+    for(WBGPath *path in _allLineMutableArray)
+    {
         [path drawPath];
     }
     
@@ -105,11 +127,16 @@
     UIGraphicsEndImageContext();
 }
 
-- (UIImage *)buildImage {
+- (UIImage *)buildImage
+{
     UIGraphicsBeginImageContextWithOptions(_originalImageSize, NO, self.editor.imageView.image.scale);
+    
     [self.editor.imageView.image drawAtPoint:CGPointZero];
+    
     [_drawingView.image drawInRect:CGRectMake(0, 0, _originalImageSize.width, _originalImageSize.height)];
+    
     UIImage *tmp = UIGraphicsGetImageFromCurrentImageContext();
+    
     UIGraphicsEndImageContext();
     
     return tmp;
@@ -175,9 +202,14 @@
 
 @end
 
-
 #pragma mark - WBGPath
 @interface WBGPath()
+{
+    //参考那个
+    UIImage *incrementalImage;
+    CGPoint pts[5];
+    uint ctr;
+}
 
 @property (nonatomic, strong) UIBezierPath *bezierPath;
 @property (nonatomic, assign) CGPoint beginPoint;
@@ -187,38 +219,19 @@
 
 @implementation WBGPath
 
-
-+ (instancetype)pathToPoint:(CGPoint)beginPoint pathWidth:(CGFloat)pathWidth {
++ (instancetype)pathToPoint:(CGPoint)beginPoint pathWidth:(CGFloat)pathWidth
+{
     UIBezierPath *bezierPath = [UIBezierPath bezierPath];
     bezierPath.lineWidth     = pathWidth;
     bezierPath.lineCapStyle  = kCGLineCapRound;
     bezierPath.lineJoinStyle = kCGLineJoinRound;
-    [bezierPath moveToPoint:beginPoint];
-    
-    
-    CAShapeLayer *shapeLayer = [[CAShapeLayer alloc] init];
-    shapeLayer.lineCap = kCALineCapRound;
-    shapeLayer.lineJoin = kCALineJoinRound;
-    shapeLayer.lineWidth = pathWidth;
-    shapeLayer.fillColor = [UIColor clearColor].CGColor;
-    shapeLayer.path = bezierPath.CGPath;
-    shapeLayer.shouldRasterize = YES;
     
     WBGPath *path   = [[WBGPath alloc] init];
     path.beginPoint = beginPoint;
     path.pathWidth  = pathWidth;
     path.bezierPath = bezierPath;
-    path.shape      = shapeLayer;
     
     return path;
-}
-
-//曲线
-- (void)pathLineToPoint:(CGPoint)movePoint;
-{
-    //判断绘图类型
-    [self.bezierPath addLineToPoint:movePoint];
-    self.shape.path = self.bezierPath.CGPath;
 }
 
 - (void)drawPath
@@ -230,6 +243,37 @@
     CGContextSetShadowWithColor(content, CGSizeMake(0, 0), 6.0, self.pathColor.CGColor);
     
     [self.bezierPath stroke];
+}
+
+//参考
+- (void)pathExTouchesBegan:(CGPoint)point
+{
+    ctr = 0;
+    
+    pts[0] = point;
+}
+
+- (void)pathExTouchesMoved:(CGPoint)point
+{
+    CGPoint p = point;
+    
+    ctr++;
+    
+    pts[ctr] = p;
+    
+    if(ctr == 4)
+    {
+        pts[3] = CGPointMake((pts[2].x + pts[4].x)/2.0, (pts[2].y + pts[4].y)/2.0);
+        
+        [self.bezierPath moveToPoint:pts[0]];
+        [self.bezierPath addCurveToPoint:pts[3] controlPoint1:pts[1] controlPoint2:pts[2]];
+        
+        [self.superState drawLinePathEx];
+        
+        pts[0] = pts[3];
+        pts[1] = pts[4];
+        ctr = 1;
+    }
 }
 
 @end

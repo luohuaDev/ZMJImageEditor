@@ -646,7 +646,7 @@ NSString * const kColorPanNotificaiton = @"kColorPanNotificaiton";
     
     //生成图片后，清空画布内容
     [self.drawTool.allLineMutableArray removeAllObjects];
-    [self.drawTool drawLine];
+    [self.drawTool drawLinePathEx];
     [_drawingView removeAllSubviews];
     self.undoButton.hidden = YES;
     self.undoLab.hidden = YES;
