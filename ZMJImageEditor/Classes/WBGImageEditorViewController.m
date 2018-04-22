@@ -252,7 +252,7 @@ NSString * const kColorPanNotificaiton = @"kColorPanNotificaiton";
             
             //[weakSelf hiddenTopAndBottomBar:!weakSelf.barsHiddenStatus animation:YES];
         };
-        _drawTool.pathWidth = [self.dataSource respondsToSelector:@selector(imageEditorDrawPathWidth)] ? [self.dataSource imageEditorDrawPathWidth].floatValue : 5.0f;
+        _drawTool.pathWidth = [self.dataSource respondsToSelector:@selector(imageEditorDrawPathWidth)] ? [self.dataSource imageEditorDrawPathWidth].floatValue : 3.0f;
     }
     
     return _drawTool;
