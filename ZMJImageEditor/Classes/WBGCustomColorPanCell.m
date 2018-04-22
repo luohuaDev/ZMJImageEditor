@@ -11,12 +11,14 @@
 
 - (void)setup
 {
-    self.smallView.clipsToBounds = YES;
     self.smallView.layer.cornerRadius = self.smallView.frame.size.width / 2.0;
     self.smallView.layer.borderColor = [UIColor whiteColor].CGColor;
     self.smallView.layer.borderWidth = 1.0;
+    self.smallView.layer.shadowColor = [UIColor blackColor].CGColor;
+    self.smallView.layer.shadowOpacity = 0.5f;
+    self.smallView.layer.shadowRadius = 2.0;
+    self.smallView.layer.shadowOffset = CGSizeMake(0.0, 2.0);
     
-    self.bigView.clipsToBounds = YES;
     self.bigView.layer.cornerRadius = self.bigView.frame.size.width / 2.0;
     self.bigView.layer.borderColor = [UIColor whiteColor].CGColor;
     self.bigView.layer.borderWidth = 1.5;

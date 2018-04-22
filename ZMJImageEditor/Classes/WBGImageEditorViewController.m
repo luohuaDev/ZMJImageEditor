@@ -148,6 +148,16 @@ NSString * const kColorPanNotificaiton = @"kColorPanNotificaiton";
     self.sendButton.hidden = NO;
     self.sendButtonLab.hidden = NO;
     
+    self.undoLab.layer.shadowColor = [UIColor blackColor].CGColor;
+    self.undoLab.layer.shadowOpacity = 0.5f;
+    self.undoLab.layer.shadowRadius = 2.0;
+    self.undoLab.layer.shadowOffset = CGSizeMake(0.0, 2.0);
+    
+    self.sendButtonLab.layer.shadowColor = [UIColor blackColor].CGColor;
+    self.sendButtonLab.layer.shadowOpacity = 0.5f;
+    self.sendButtonLab.layer.shadowRadius = 2.0;
+    self.sendButtonLab.layer.shadowOffset = CGSizeMake(0.0, 2.0);
+    
     if(self.state == WBGImageEditorStateEditFeed)
     {
         self.sendButton.hidden = YES;
