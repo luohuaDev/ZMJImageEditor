@@ -19,6 +19,7 @@
 #import "WBGMoreKeyboard.h"
 #import "Masonry.h"
 #import "YYCategories.h"
+#import "WBGImageEditorUndoTipView.h"
 
 NSString * const kColorPanNotificaiton = @"kColorPanNotificaiton";
 
@@ -546,11 +547,40 @@ NSString * const kColorPanNotificaiton = @"kColorPanNotificaiton";
 
 - (IBAction)backAction:(UIButton *)sender
 {
-    [self dismissViewControllerAnimated:YES completion:nil];
-    
-    if(self.delegate && [self.delegate respondsToSelector:@selector(imageEditorDidCancel:)])
+    if(self.undoButton.hidden == NO)
     {
-        [self.delegate imageEditorDidCancel:self];
+        WBGImageEditorUndoTipView *tipView = [[WBGImageEditorUndoTipView alloc] init];
+        
+        [self.view addSubview:tipView];
+        
+        [tipView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.edges.equalTo(self.view);
+        }];
+        
+        [tipView setClickBlock:^(BOOL isAbandon, WBGImageEditorUndoTipView *view) {
+            if(isAbandon)
+            {
+                [self dismissViewControllerAnimated:YES completion:nil];
+                
+                if(self.delegate && [self.delegate respondsToSelector:@selector(imageEditorDidCancel:)])
+                {
+                    [self.delegate imageEditorDidCancel:self];
+                }
+            }
+            else
+            {
+                [view removeFromSuperview];
+            }
+        }];
+    }
+    else
+    {
+        [self dismissViewControllerAnimated:YES completion:nil];
+        
+        if(self.delegate && [self.delegate respondsToSelector:@selector(imageEditorDidCancel:)])
+        {
+            [self.delegate imageEditorDidCancel:self];
+        }
     }
 }
 
