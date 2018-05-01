@@ -99,7 +99,7 @@
         
         _whiteView.backgroundColor = [UIColor whiteColor];
         
-        _whiteView.layer.cornerRadius = 7.5;
+        _whiteView.layer.cornerRadius = 15.0;
     }
     
     return _whiteView;
@@ -127,7 +127,7 @@
     {
         _abandonBtn = [[UIButton alloc] init];
         
-        _abandonBtn.layer.cornerRadius = 11.0;
+        _abandonBtn.layer.cornerRadius = 22.0;
         _abandonBtn.backgroundColor = [UIColor jk_colorWithHex:0x0DADFF];
         [_abandonBtn setTitle:@"Abandon" forState:UIControlStateNormal];
         [_abandonBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
