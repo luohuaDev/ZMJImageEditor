@@ -868,7 +868,7 @@ NSString * const kColorPanNotificaiton = @"kColorPanNotificaiton";
         
         dispatch_async(dispatch_get_main_queue(), ^{
             //HideBusyIndicatorForView(self.view);
-            UIImage *image = [UIImage imageWithCGImage:tmp.CGImage scale:[UIScreen mainScreen].scale orientation:UIImageOrientationUp];
+            UIImage *image = [UIImage imageWithCGImage:tmp.CGImage scale:0.25 orientation:UIImageOrientationUp];
             clipedCallback(image);
             
         });
