@@ -20,6 +20,9 @@
 #import "Masonry.h"
 #import "YYCategories.h"
 #import "WBGImageEditorUndoTipView.h"
+#import "UIView+JKFrame.h"
+
+#define IS_IPHONEX [[UIScreen mainScreen]bounds].size.height == 812 ? 1 : 0
 
 NSString * const kColorPanNotificaiton = @"kColorPanNotificaiton";
 
@@ -163,6 +166,25 @@ NSString * const kColorPanNotificaiton = @"kColorPanNotificaiton";
     {
         self.sendButton.hidden = YES;
         self.sendButtonLab.hidden = YES;
+    }
+    
+    if(IS_IPHONEX)
+    {
+        [self.backButton mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.view).offset(24.0);
+        }];
+        
+        [self.backImage mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.view).offset(19.0 + 24.0);
+        }];
+        
+        [self.hzColorPan mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.view).offset(150.0 + 24.0);
+        }];
+        
+        [self.self.sendButtonLab mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.bottom.equalTo(self.view).offset(-34.0);
+        }];
     }
     
     @weakify(self);
